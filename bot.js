@@ -10,6 +10,14 @@ const chalk = require('chalk')
 
 const log = console.log
 
+const commands = {
+  "ping": "Gets the current latency.",
+  "mitchell": "My thoughts about Mitchell.",
+  "parking": "Gets the number of available spaces in Auckland parking garages.",
+  "followers": "Gets the number of Instagram followers for the specified username.",
+  "f1": "Gets information about the next Formula 1 Grand Prix."
+}
+
 client.on('ready', () => {
   log(chalk.cyan(`                                                      
     SSSSSSSSSSSSSSS                                           
@@ -44,6 +52,11 @@ client.on('message', async message => {
     const reply = await message.channel.send("Ping?");
     reply.edit(`Pong! Latency is ${reply.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`)
     return
+  }
+
+  if (command === 'help') {
+    message.channel.send(Object.entries(commands).map(([name, desc]) => `${name}: ${desc}`))
+    return 
   }
 
   if (command === 'mitchell') {
