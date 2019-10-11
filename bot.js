@@ -55,7 +55,7 @@ client.on('message', async message => {
   }
 
   if (command === 'help') {
-    message.channel.send(Object.entries(commands).map(([name, desc]) => `${name}: ${desc}`))
+    message.channel.send(Object.entries(commands).map(([name, desc]) => `**${name}**: ${desc}`))
     return 
   }
 
