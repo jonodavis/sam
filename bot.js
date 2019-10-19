@@ -95,19 +95,21 @@ client.on('message', async message => {
   }
 
   // MUSIC BOT COMMANDS
-  if (command === 'play') {
-		music.execute(message);
-		return;
-  } 
-  
-  if (command === 'skip') {
-		music.skip(message);
-		return;
-  } 
-  
-  if (command === 'stop') {
-		music.stop(message);
-    return;
+  if (music){
+    if (command === 'play') {
+      music.execute(message)
+      return
+    } 
+    
+    if (command === 'skip') {
+      music.skip(message)
+      return
+    } 
+    
+    if (command === 'stop') {
+      music.stop(message)
+      return
+    }
   }
 
   else {
