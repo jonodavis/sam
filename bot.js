@@ -124,6 +124,23 @@ client.on("message", async message => {
     return;
   }
 
+  if (command === "addrole") {
+    const roles = {
+      "he/him": "636502639332294656",
+      "she/her": "636502829250510880",
+      "they/them": "636502851224469504",
+      ask: "636502890562846720"
+    };
+
+    if (args[0] in roles) {
+      message.member.addRole(roles[args[0]]);
+      log(`Adding role ${args[0]} to user ${message.author.tag}`);
+      message.channel.send(`Role ${args[0]} added!`);
+    } else {
+      message.channel.send(`Sorry, I can't find that role.`);
+    }
+  }
+
   // MUSIC BOT COMMANDS
   if (music) {
     if (command === "play") {
