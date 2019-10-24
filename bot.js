@@ -16,30 +16,12 @@ const commands = {
   parking: "Gets the number of available spaces in Auckland parking garages.",
   followers:
     "Gets the number of Instagram followers for the specified username.",
-  f1: "Gets information about the next Formula 1 Grand Prix."
+  f1: "Gets information about the next Formula 1 Grand Prix.",
+  addrole: "Adds the specified role to the user."
 };
 
 client.on("ready", () => {
-  log(
-    chalk.cyan(`                                                      
-    SSSSSSSSSSSSSSS                                           
-  SS:::::::::::::::S                                          
- S:::::SSSSSS::::::S                                          
- S:::::S     SSSSSSS                                          
- S:::::S              aaaaaaaaaaaaa      mmmmmmm    mmmmmmm   
- S:::::S              a::::::::::::a   mm:::::::m  m:::::::mm 
-  S::::SSSS           aaaaaaaaa:::::a m::::::::::mm::::::::::m
-   SS::::::SSSSS               a::::a m::::::::::::::::::::::m
-     SSS::::::::SS      aaaaaaa:::::a m:::::mmm::::::mmm:::::m
-        SSSSSS::::S   aa::::::::::::a m::::m   m::::m   m::::m
-             S:::::S a::::aaaa::::::a m::::m   m::::m   m::::m
-             S:::::Sa::::a    a:::::a m::::m   m::::m   m::::m
- SSSSSSS     S:::::Sa::::a    a:::::a m::::m   m::::m   m::::m
- S::::::SSSSSS:::::Sa:::::aaaa::::::a m::::m   m::::m   m::::m
- S:::::::::::::::SS  a::::::::::aa:::am::::m   m::::m   m::::m
-  SSSSSSSSSSSSSSS     aaaaaaaaaa  aaaammmmmm   mmmmmm   mmmmmm                                                        
-    `)
-  );
+  log(chalk.cyan(`Sam is ready!`));
   log(`Logged in as ${client.user.tag}!`);
 });
 
@@ -124,6 +106,7 @@ client.on("message", async message => {
     return;
   }
 
+  // used for users to add roles to themselves
   if (command === "addrole") {
     const roles = {
       "he/him": "636502639332294656",
