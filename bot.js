@@ -1,26 +1,34 @@
 const Discord = require("discord.js");
+const chalk = require("chalk");
+const http = require('http');
+
 const client = new Discord.Client();
+
 const auth = require("./auth.json");
 const config = require("./config.json");
+
 const getParking = require("./commands/getParking");
 const getInstagram = require("./commands/getInstagram");
 const f1next = require("./commands/f1next");
 const music = require("./commands/music");
-const chalk = require("chalk");
-const WebSocket = require('ws');
 
 const log = console.log;
+const port = 8080;
 
-const startWebsocketServer = () => {
-  const wss = new WebSocket.Server({ port: 8080 });
-
-  wss.on('connection', function connection(ws) {
-    ws.on('message', function incoming(message) {
-      console.log('received: %s', message);
-    });
+const startServer = () => {
+  const server = http.createServer((req, res) => {
+    if (req.method === "POST") {
+      req.on('data', chunk => {
+        log(chunk.toString());
+      });
+    }
+    res.statusCode = 200
+    res.end()
+  })
   
-    // ws.send('something');
-  });
+  server.listen(port, () => {
+    log(`HTTP Server running at port ${port}`)
+  })
 }
 
 const commands = {
@@ -162,4 +170,4 @@ client.on("message", async message => {
 // start the bot
 client.login(auth.token);
 // start the websocket server
-startWebsocketServer();
+startServer();
