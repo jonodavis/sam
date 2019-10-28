@@ -7,8 +7,21 @@ const getInstagram = require("./commands/getInstagram");
 const f1next = require("./commands/f1next");
 const music = require("./commands/music");
 const chalk = require("chalk");
+const WebSocket = require('ws');
 
 const log = console.log;
+
+const startWebsocketServer = () => {
+  const wss = new WebSocket.Server({ port: 8080 });
+
+  wss.on('connection', function connection(ws) {
+    ws.on('message', function incoming(message) {
+      console.log('received: %s', message);
+    });
+  
+    // ws.send('something');
+  });
+}
 
 const commands = {
   ping: "Gets the current latency.",
@@ -148,3 +161,5 @@ client.on("message", async message => {
 
 // start the bot
 client.login(auth.token);
+// start the websocket server
+startWebsocketServer();
